@@ -1,0 +1,12 @@
+package es.dwes.backend_usuarios.repository;
+
+import java.util.Optional;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import es.dwes.backend_usuarios.entity.Usuario;
+
+public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
+    Optional<Usuario> findByEmail(String email);
+    
+}
