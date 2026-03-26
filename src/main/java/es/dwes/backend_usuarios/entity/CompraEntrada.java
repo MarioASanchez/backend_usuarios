@@ -27,6 +27,15 @@ public class CompraEntrada {
     @Column(name="fechaCompra")
     private LocalDate fechaCompra;
 
+    @Column(name="idEvento")
+    private Long idEvento;
+
+    @Column(name="precio")
+    private Double precio;
+
     @Column(name="cantidad")
     private Long cantidad;
+
+    @Column(name="asientos")
+    private String asientos;
 }
