@@ -1,14 +1,18 @@
 package es.dwes.backend_usuarios.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.dwes.backend_usuarios.DTO.UsuarioDTO;
@@ -49,6 +53,19 @@ public class UsuarioController {
         }
         
     }
+    
+    @GetMapping("/permisos")
+    public ResponseEntity<List<UsuarioDTO>> obtenerUsuarios(){
+        return ResponseEntity.ok(this.servicio.obtenerUsuarios());
+    }
 
-    // Por implementar el actualizar y el eliminar, además del actualizar a administrador
+    @PatchMapping("/permisos")
+    public ResponseEntity<UsuarioDTO> actualizarAdmin(@RequestParam Long id){
+        try {
+            return ResponseEntity.ok(this.servicio.actualizarAdmin(id));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
 }

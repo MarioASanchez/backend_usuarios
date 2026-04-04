@@ -1,5 +1,7 @@
 package es.dwes.backend_usuarios.service;
 
+import java.util.List;
+
 import es.dwes.backend_usuarios.DTO.UsuarioDTO;
 
 public interface UsuarioService {
@@ -13,4 +15,6 @@ public interface UsuarioService {
     public UsuarioDTO actualizarDatos(Long id, UsuarioDTO dto);
     // Eliminar cuenta
     public void eliminarUsuario(Long id);
+    // Obtener usuarios
+    public List<UsuarioDTO> obtenerUsuarios();
 }

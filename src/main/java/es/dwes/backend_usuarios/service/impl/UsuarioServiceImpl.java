@@ -1,5 +1,6 @@
 package es.dwes.backend_usuarios.service.impl;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.dao.DataIntegrityViolationException;
@@ -57,12 +58,23 @@ public class UsuarioServiceImpl implements UsuarioService {
 
         if(usuario.isPresent()){
             Usuario usuarioObtenido = usuario.get();
-            usuarioObtenido.setAdmin(true);
+                if(usuarioObtenido.getAdmin()){
+                    usuarioObtenido.setAdmin(false);
+                }else{
+                    usuarioObtenido.setAdmin(true);
+                }      
             this.repositorio.save(usuarioObtenido);
             return this.mapper.toDTO(usuarioObtenido);
         }
+
         throw new Exception("No se ha podido actualizar el estatus del usuario");
     }
+
+    @Override
+    public List<UsuarioDTO> obtenerUsuarios(){
+        return this.repositorio.findAll().stream().map(mapper::toDTO).toList();
+    }
+
 
     @Override
     public UsuarioDTO actualizarDatos(Long id, UsuarioDTO dto) {
