@@ -71,6 +71,15 @@ public class UsuarioController {
     }
 
 
+    @PatchMapping("/cambiarDatos/{id}")
+    public ResponseEntity<UsuarioDTO> actualizarDatos(@PathVariable("id") Long id, @RequestBody UsuarioDTO usuario){
+        try {
+            return ResponseEntity.ok(this.servicio.actualizarDatos(id, usuario));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
     @DeleteMapping("/eliminarCuenta/{id}")
     public ResponseEntity<Void> eliminarCuenta(@PathVariable("id") Long id){
         this.servicio.eliminarUsuario(id);

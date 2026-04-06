@@ -77,8 +77,19 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 
     @Override
-    public UsuarioDTO actualizarDatos(Long id, UsuarioDTO dto) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public UsuarioDTO actualizarDatos(Long id, UsuarioDTO dto) throws Exception {
+        Optional <Usuario> usuario = this.repositorio.findById(id);
+
+        if(usuario.isPresent()){
+            Usuario usuarioObtenido = usuario.get();
+            usuarioObtenido.setNombre(dto.getNombre());
+            usuarioObtenido.setApellidos(dto.getApellidos());
+            usuarioObtenido.setNombreUsuario(dto.getNombreUsuario());
+            this.repositorio.save(usuarioObtenido);
+            return this.mapper.toDTO(usuarioObtenido);
+        }
+
+        throw new Exception("No hemos podido actualizar tus datos");
     }
 
     @Override

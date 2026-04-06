@@ -12,7 +12,7 @@ public interface UsuarioService {
     // Modificar permisos de administrador
     public UsuarioDTO actualizarAdmin(Long id) throws Exception;
     // Modificar datos
-    public UsuarioDTO actualizarDatos(Long id, UsuarioDTO dto);
+    public UsuarioDTO actualizarDatos(Long id, UsuarioDTO dto) throws Exception;
     // Eliminar cuenta
     public void eliminarUsuario(Long id);
     // Obtener usuarios
