@@ -83,7 +83,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public void eliminarUsuario(Long id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+       Optional<Usuario> usuario = this.repositorio.findById(id);
+       if(usuario.isPresent()){
+            this.repositorio.deleteById(id);
+       }
     }
 
 }
