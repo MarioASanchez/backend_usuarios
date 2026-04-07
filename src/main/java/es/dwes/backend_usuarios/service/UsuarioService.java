@@ -17,4 +17,5 @@ public interface UsuarioService {
     public void eliminarUsuario(Long id);
     // Obtener usuarios
     public List<UsuarioDTO> obtenerUsuarios();
+
 }

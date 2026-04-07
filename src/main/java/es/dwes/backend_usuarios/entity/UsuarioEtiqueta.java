@@ -1,5 +1,6 @@
 package es.dwes.backend_usuarios.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -10,7 +11,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name="usuarioEtiqueta")
+@Table(name="usuario_etiqueta")
 @Data
 public class UsuarioEtiqueta {
     @Id
@@ -21,7 +22,6 @@ public class UsuarioEtiqueta {
     @JoinColumn(name="idUsuario")
     private Usuario usuario;
 
-    @ManyToOne
-    @JoinColumn(name="idEtiqueta")
-    private Etiqueta etiqueta;
+    @Column(name="idEtiqueta")
+    private Long idEtiqueta;
 }

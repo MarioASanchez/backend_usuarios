@@ -70,7 +70,6 @@ public class UsuarioController {
         }
     }
 
-
     @PatchMapping("/cambiarDatos/{id}")
     public ResponseEntity<UsuarioDTO> actualizarDatos(@PathVariable("id") Long id, @RequestBody UsuarioDTO usuario){
         try {
@@ -85,4 +84,6 @@ public class UsuarioController {
         this.servicio.eliminarUsuario(id);
         return ResponseEntity.noContent().build();
     }
+
+
 }
