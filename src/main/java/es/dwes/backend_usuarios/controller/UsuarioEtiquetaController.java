@@ -1,7 +1,11 @@
 package es.dwes.backend_usuarios.controller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,5 +33,17 @@ public class UsuarioEtiquetaController {
 
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+    @GetMapping("/preferencias/{id}")
+    public ResponseEntity<UsuarioEtiquetaDTO> obtenerPreferencias(@PathVariable Long id) {
+        // Obtenemos la lista y, si no está vacía, devolvemos el primer (y único) DTO
+        List<UsuarioEtiquetaDTO> resultado = servicio.obtenerEtiquetasUsuarios(id);
+
+        if (resultado.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok(resultado.get(0));
     }
 }

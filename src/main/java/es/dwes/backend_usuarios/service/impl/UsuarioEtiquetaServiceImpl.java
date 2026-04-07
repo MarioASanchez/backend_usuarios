@@ -1,5 +1,8 @@
 package es.dwes.backend_usuarios.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Service;
 
 import es.dwes.backend_usuarios.DTO.UsuarioEtiquetaDTO;
@@ -18,6 +21,7 @@ public class UsuarioEtiquetaServiceImpl implements UsuarioEtiquetaService {
     private final UsuarioEtiquetaRepository repositorio;
     private final UsuarioRepository repositorioUsuarios;
 
+
     @Override
     @Transactional
     public void sincronizarEtiquetas(UsuarioEtiquetaDTO dto) {
@@ -35,5 +39,24 @@ public class UsuarioEtiquetaServiceImpl implements UsuarioEtiquetaService {
             ue.setIdEtiqueta(idEt); // Solo el ID (Long), no el objeto Etiqueta
             this.repositorio.save(ue);
         }
+    }
+
+    @Override
+    public List<UsuarioEtiquetaDTO> obtenerEtiquetasUsuarios(Long id) {
+        // 1. Obtenemos todos los registros de la base de datos para ese usuario
+        List<UsuarioEtiqueta> asignaciones = this.repositorio.findByUsuario_Id(id);
+
+        // 2. Extraemos solo los IDs de las etiquetas (idEtiqueta) de esos registros
+        List<Long> idsSoloEtiquetas = asignaciones.stream()
+                .map(UsuarioEtiqueta::getIdEtiqueta)
+                .collect(Collectors.toList());
+
+        // 3. Creamos el DTO de respuesta
+        UsuarioEtiquetaDTO dto = new UsuarioEtiquetaDTO();
+        dto.setIdUsuario(id);
+        dto.setIdsEtiquetas(idsSoloEtiquetas);
+
+        
+        return List.of(dto);
     }
 }

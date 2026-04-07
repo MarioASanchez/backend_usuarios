@@ -30,7 +30,7 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 // Permitimos acceso público a registro, login y toda la API de compras para desarrollo
-                .requestMatchers("/registro", "/login", "/api/**", "/permisos", "/cambiarDatos/**", "/eliminarCuenta/**", "/preferencias").permitAll() 
+                .requestMatchers("/registro", "/login", "/api/**", "/permisos", "/cambiarDatos/**", "/eliminarCuenta/**", "/preferencias", "/preferencias/**").permitAll() 
                 .anyRequest().authenticated()        
                 
             )
